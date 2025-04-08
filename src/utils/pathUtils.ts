@@ -1,10 +1,11 @@
 import path from 'path';
+import fs from 'node:fs/promises';
 import { McpError, ErrorCode } from '@modelcontextprotocol/sdk/types.js';
 
 // Use the server's current working directory as the project root.
 export const PROJECT_ROOT = process.cwd();
 
-console.info(`[Excel to PDF MCP - pathUtils] Project Root determined from CWD: ${PROJECT_ROOT}`);
+console.error(`[Excel to PDF MCP - pathUtils] Project Root determined from CWD: ${PROJECT_ROOT}`);
 
 /**
  * Resolves a user-provided relative path against the project root,
@@ -52,10 +53,16 @@ export const createTempFilePath = (originalName: string): string => {
  * Ensures the existence of the temporary directory
  * @returns The absolute path to the temp directory
  */
-export const ensureTempDir = (): string => {
+export const ensureTempDir = async (): Promise<string> => {
   const tempDir = path.resolve(PROJECT_ROOT, 'temp');
   
-  // In actual implementation, we would create the directory here
-  // but we'll just return the path for now
+  try {
+    await fs.mkdir(tempDir, { recursive: true });
+    console.error(`[Excel to PDF MCP] Created or verified temp directory: ${tempDir}`);
+  } catch (error) {
+    console.error(`[Excel to PDF MCP] Error creating temp directory: ${error}`);
+    // Still return the path even if creation failed, so calling code can handle the error
+  }
+  
   return tempDir;
 };
