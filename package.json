@@ -2,12 +2,21 @@
   "name": "excel-to-pdf-mcp",
   "version": "1.0.0",
   "description": "An MCP server that can convert Excel (.xls/.xlsx) and Apple Numbers (.numbers) files to PDF",
-  "main": "src/index.js",
+  "type": "module",
+  "main": "dist/index.js",
   "bin": {
-    "excel-to-pdf-mcp": "./bin/cli.js"
+    "excel-to-pdf-mcp": "./dist/index.js"
   },
+  "files": [
+    "dist/",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
-    "start": "node src/index.js",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsc --watch",
+    "prepublishOnly": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -17,20 +26,23 @@
     "convert",
     "numbers",
     "xlsx",
-    "xls"
+    "xls",
+    "model-context-protocol"
   ],
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@mcp-framework/server": "^0.1.1",
-    "commander": "^11.1.0",
-    "express": "^4.18.2",
+    "@modelcontextprotocol/sdk": "^1.8.0",
     "libreoffice-convert": "^1.4.1",
-    "multer": "^1.4.5-lts.1",
-    "pdfkit": "^0.14.0",
-    "xlsx": "^0.18.5"
+    "xlsx": "^0.18.5",
+    "zod": "^3.22.4",
+    "zod-to-json-schema": "^3.22.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.28",
+    "typescript": "^5.3.3"
   },
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=16.0.0"
   }
 }
