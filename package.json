@@ -1,5 +1,5 @@
 {
-  "author": "kmexnx"
+  "author": "kmexnx",
   "name": "excel-to-pdf-mcp",
   "version": "1.0.0",
   "description": "An MCP server that can convert Excel (.xls/.xlsx) and Apple Numbers (.numbers) files to PDF",
