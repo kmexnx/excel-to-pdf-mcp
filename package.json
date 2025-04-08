@@ -1,0 +1,36 @@
+{
+  "name": "excel-to-pdf-mcp",
+  "version": "1.0.0",
+  "description": "An MCP server that can convert Excel (.xls/.xlsx) and Apple Numbers (.numbers) files to PDF",
+  "main": "src/index.js",
+  "bin": {
+    "excel-to-pdf-mcp": "./bin/cli.js"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "mcp",
+    "excel",
+    "pdf",
+    "convert",
+    "numbers",
+    "xlsx",
+    "xls"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@mcp-framework/server": "^0.1.1",
+    "commander": "^11.1.0",
+    "express": "^4.18.2",
+    "libreoffice-convert": "^1.4.1",
+    "multer": "^1.4.5-lts.1",
+    "pdfkit": "^0.14.0",
+    "xlsx": "^0.18.5"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
