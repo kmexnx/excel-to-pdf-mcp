@@ -1,7 +1,6 @@
 {
-  "author": "kmexnx",
   "name": "excel-to-pdf-mcp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "An MCP server that can convert Excel (.xls/.xlsx) and Apple Numbers (.numbers) files to PDF",
   "type": "module",
   "main": "dist/index.js",
@@ -30,7 +29,7 @@
     "xls",
     "model-context-protocol"
   ],
-  "author": "",
+  "author": "kmexnx",
   "license": "MIT",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.8.0",
