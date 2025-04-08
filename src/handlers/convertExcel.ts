@@ -19,18 +19,31 @@ const ConvertExcelArgsSchema = z.object({
 type ConvertExcelArgs = z.infer<typeof ConvertExcelArgsSchema>;
 
 // --- Helper Function to Check LibreOffice Installation ---
-async function checkLibreOfficeInstalled(): Promise<boolean> {
+// Export for use in verifyEnvironment
+export async function checkLibreOfficeInstalled(): Promise<boolean> {
   try {
     const isWindows = process.platform === 'win32';
     const command = isWindows ? 'where' : 'which';
-    const commandArg = isWindows ? 'soffice.exe' : 'libreoffice';
+    const possibleCommands = isWindows ? ['soffice.exe'] : ['libreoffice', 'soffice'];
     
     const { exec } = await import('node:child_process');
     const execPromise = promisify(exec);
     
-    await execPromise(`${command} ${commandArg}`);
-    return true;
+    // Try with multiple possible command names
+    for (const commandArg of possibleCommands) {
+      try {
+        await execPromise(`${command} ${commandArg}`);
+        console.error(`[Excel to PDF MCP] Found LibreOffice at: ${commandArg}`);
+        return true;
+      } catch {
+        // Continue with next command
+      }
+    }
+    
+    console.error('[Excel to PDF MCP] LibreOffice not found in PATH');
+    return false;
   } catch (error) {
+    console.error('[Excel to PDF MCP] Error checking for LibreOffice:', error);
     return false;
   }
 }
@@ -64,9 +77,8 @@ export const handleConvertExcelFunc = async (
   }
 
   try {
-    // Ensure temp directory exists
-    const tempDir = ensureTempDir();
-    await fs.mkdir(tempDir, { recursive: true });
+    // Ensure temp directory exists - now await because the function is async
+    const tempDir = await ensureTempDir();
     
     // Resolve input path
     const inputPath = resolvePath(parsedArgs.input_path);
