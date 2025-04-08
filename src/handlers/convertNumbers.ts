@@ -4,6 +4,7 @@ import { promisify } from 'node:util';
 import path from 'node:path';
 import { resolvePath, createTempFilePath, ensureTempDir } from '../utils/pathUtils.js';
 import { McpError, ErrorCode } from '@modelcontextprotocol/sdk/types.js';
+import { checkLibreOfficeInstalled } from './convertExcel.js';
 import type { ToolDefinition } from './index.js';
 
 // Import the libre office converter
@@ -18,28 +19,11 @@ const ConvertNumbersArgsSchema = z.object({
 
 type ConvertNumbersArgs = z.infer<typeof ConvertNumbersArgsSchema>;
 
-// --- Helper Function to Check LibreOffice Installation ---
-async function checkLibreOfficeInstalled(): Promise<boolean> {
-  try {
-    const isWindows = process.platform === 'win32';
-    const command = isWindows ? 'where' : 'which';
-    const commandArg = isWindows ? 'soffice.exe' : 'libreoffice';
-    
-    const { exec } = await import('node:child_process');
-    const execPromise = promisify(exec);
-    
-    await execPromise(`${command} ${commandArg}`);
-    return true;
-  } catch (error) {
-    return false;
-  }
-}
-
 // --- Handler Function ---
 export const handleConvertNumbersFunc = async (
   args: unknown
 ): Promise<{ content: { type: string; text: string }[] }> => {
-  // Ensure LibreOffice is installed
+  // Ensure LibreOffice is installed - reuse function from convertExcel.ts
   const libreOfficeInstalled = await checkLibreOfficeInstalled();
   if (!libreOfficeInstalled) {
     throw new McpError(
@@ -64,9 +48,8 @@ export const handleConvertNumbersFunc = async (
   }
 
   try {
-    // Ensure temp directory exists
-    const tempDir = ensureTempDir();
-    await fs.mkdir(tempDir, { recursive: true });
+    // Ensure temp directory exists - now await because the function is async
+    const tempDir = await ensureTempDir();
     
     // Resolve input path
     const inputPath = resolvePath(parsedArgs.input_path);
