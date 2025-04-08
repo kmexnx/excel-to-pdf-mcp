@@ -55,8 +55,39 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
   return toolDefinition.handler(request.params.arguments);
 });
 
+// Verify environment before starting the server
+async function verifyEnvironment(): Promise<void> {
+  console.error('[Excel to PDF MCP] Verifying environment...');
+  
+  // Create temporary directory
+  try {
+    const { ensureTempDir } = await import('./utils/pathUtils.js');
+    await ensureTempDir();
+  } catch (error) {
+    console.error('[Excel to PDF MCP] Error creating temp directory:', error);
+  }
+  
+  // Check if LibreOffice is installed
+  try {
+    const { checkLibreOfficeInstalled } = await import('./handlers/convertExcel.js');
+    const libreOfficeInstalled = await checkLibreOfficeInstalled();
+    
+    if (!libreOfficeInstalled) {
+      console.error('[Excel to PDF MCP] WARNING: LibreOffice not found in PATH. Conversions will fail!');
+    } else {
+      console.error('[Excel to PDF MCP] Found LibreOffice installation. Environment looks good.');
+    }
+  } catch (error) {
+    console.error('[Excel to PDF MCP] Error checking for LibreOffice:', error);
+  }
+}
+
 // --- Server Start ---
 async function main(): Promise<void> {
+  // Verify environment before starting
+  await verifyEnvironment();
+  
+  // Start the server
   const transport = new StdioServerTransport();
   await server.connect(transport);
   console.error('[Excel to PDF MCP] Server running on stdio');
