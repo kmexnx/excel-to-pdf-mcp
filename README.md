@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/kmexnx-excel-to-pdf-mcp-badge.png)](https://mseep.ai/app/kmexnx-excel-to-pdf-mcp)
+
 # Excel to PDF MCP Server
 
 An MCP (Model Context Protocol) server that can convert Excel (.xls/.xlsx) and Apple Numbers (.numbers) files to PDF format. This tool integrates with AI assistants like Claude to enable file conversion directly through the conversation.
