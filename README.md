@@ -2,6 +2,10 @@
 
 An MCP (Model Context Protocol) server that can convert Excel (.xls/.xlsx) and Apple Numbers (.numbers) files to PDF format. This tool integrates with AI assistants like Claude to enable file conversion directly through the conversation.
 
+<a href="https://glama.ai/mcp/servers/@kmexnx/excel-to-pdf-mcp">
+  <img width="380" height="200" src="https://glama.ai/mcp/servers/@kmexnx/excel-to-pdf-mcp/badge" alt="Excel to PDF Converter MCP server" />
+</a>
+
 ## Features
 
 - Convert Excel files (.xls, .xlsx) to PDF
