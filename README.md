@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/kmexnx-excel-to-pdf-mcp-badge.png)](https://mseep.ai/app/kmexnx-excel-to-pdf-mcp)
+
 # Excel to PDF MCP Server
 
 [![smithery badge](https://smithery.ai/badge/@kmexnx/excel-to-pdf-mcp)](https://smithery.ai/server/@kmexnx/excel-to-pdf-mcp)
