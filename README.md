@@ -1,5 +1,7 @@
 # Excel to PDF MCP Server
 
+[![smithery badge](https://smithery.ai/badge/@kmexnx/excel-to-pdf-mcp)](https://smithery.ai/server/@kmexnx/excel-to-pdf-mcp)
+
 An MCP (Model Context Protocol) server that can convert Excel (.xls/.xlsx) and Apple Numbers (.numbers) files to PDF format. This tool integrates with AI assistants like Claude to enable file conversion directly through the conversation.
 
 ## Features
@@ -16,6 +18,14 @@ An MCP (Model Context Protocol) server that can convert Excel (.xls/.xlsx) and A
 - LibreOffice (for the conversion process)
 
 ## Installation
+
+### Installing via Smithery
+
+To install Excel to PDF Converter for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@kmexnx/excel-to-pdf-mcp):
+
+```bash
+npx -y @smithery/cli install @kmexnx/excel-to-pdf-mcp --client claude
+```
 
 ### Install LibreOffice
 
