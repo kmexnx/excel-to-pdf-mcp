@@ -88,7 +88,7 @@ Here's an example of how a conversation with Claude might look when using this M
 
 Claude would then use the tool behind the scenes:
 
-```
+```json
 Tool: convert_excel_to_pdf
 Arguments: {
   "input_path": "quarterly_report.xlsx",
