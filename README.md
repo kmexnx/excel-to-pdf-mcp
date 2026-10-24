@@ -2,7 +2,7 @@
 
 # Excel to PDF MCP Server
 
-[![smithery badge](https://smithery.ai/badge/@kmexnx/excel-to-pdf-mcp)](https://smithery.ai/server/@kmexnx/excel-to-pdf-mcp)
+[![LightNow capabilities](https://lightnow.ai/badge/io.github.kmexnx/excel-to-pdf-mcp)](https://lightnow.ai/servers/io.github.kmexnx/excel-to-pdf-mcp)
 
 An MCP (Model Context Protocol) server that can convert Excel (.xls/.xlsx) and Apple Numbers (.numbers) files to PDF format. This tool integrates with AI assistants like Claude to enable file conversion directly through the conversation.
 
